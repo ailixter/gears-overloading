@@ -1,0 +1,21 @@
+{
+    "name": "ailixter/gears-overloading",
+    "description": "Description of project Gears.Overloading.",
+    "authors": [
+        {
+            "name": "ailixter",
+            "email": "ailixter@gmail.com"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "Ailixter\\Gears\\Overloading\\": "src/",
+            "Ailixter\\Gears\\Example\\":     "example/"
+        }
+    },
+
+    "config" : {
+        "optimize-autoloader": true
+    },
+    "require": {}
+}
