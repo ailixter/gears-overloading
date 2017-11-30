@@ -18,7 +18,7 @@ trait Proxy
     final public function __call ($name, $arguments) {
         if (!is_callable([$this->proxiedObject, $name])) {
             throw new \RuntimeException('method '
-                .(is_string($this->proxiedObject) ? $this->proxiedObject : get_class($this->proxiedObject))
+                .get_class($this->proxiedObject)
                 ."::$name does not exist or inaccessible");
         }
         return call_user_func_array([$this->proxiedObject, $name], $arguments);

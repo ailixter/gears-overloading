@@ -32,16 +32,3 @@ class TestClass
     }
 }
 
-class TestProxy extends \Ailixter\Gears\Overloading\AbstractProxy
-{
-    private     $myPri = 'my private';
-    protected   $myPro = 'my protected';
-    public      $myPub = 'my public';
-
-    protected function protectedMy () {
-        return $this->myPro;
-    }
-    public function publicMy () {
-        return $this->myPub;
-    }
-}

@@ -26,7 +26,7 @@ trait Props
      */
     protected function propertyGet ($prop) {
         throw new \RuntimeException(get_class($this)
-            ." has no property '$prop' to read");
+            ." has no property '$prop' to read from");
     }
 
     /**
@@ -38,7 +38,7 @@ trait Props
      */
     protected function propertySet ($prop, $value) {
         throw new \RuntimeException(get_class($this)
-            ." has no property '$prop' to write ".gettype($value));
+            ." has no property '$prop' to write ".gettype($value). " into");
     }
 
     final public function __isset ($prop) {
