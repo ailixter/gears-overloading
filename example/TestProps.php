@@ -4,14 +4,15 @@
  * (C) {YEAR}, AII (Alexey Ilyin).
  */
 namespace Ailixter\Gears\Example;
+
+use Ailixter\Gears\Overloading\Props;
+
 /**
- * TestProps - .
- *
  * @author AII (Alexey Ilyin)
  */
 class TestProps
 {
-    use \Ailixter\Gears\Overloading\Props;
+    use Props;
 
     private     $myPri = 'my private';
     protected   $myPro = 'my protected';

@@ -4,12 +4,13 @@
  * (C) {YEAR}, AII (Alexey Ilyin).
  */
 namespace Ailixter\Gears\Example;
+
+use Ailixter\Gears\Overloading\AbstractProxy;
+
 /**
- * TestProxy - .
- *
  * @author AII (Alexey Ilyin)
  */
-class TestProxy extends \Ailixter\Gears\Overloading\AbstractProxy
+class TestProxy extends AbstractProxy
 {
     private     $myPri = 'my private';
     protected   $myPro = 'my protected';

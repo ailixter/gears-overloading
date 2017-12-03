@@ -7,17 +7,21 @@
 namespace Ailixter\Gears\Overloading;
 
 /**
- * AbstractGlobalizer - .
- *
  * @author AII (Alexey Ilyin)
  */
 abstract class AbstractGlobalizer
 {
     use Globalizer;
 
-    protected static $proxiedObject;
+    private static $proxiedObject;
 
-    protected static function getProxiedObject () {
-        return self::$proxiedObject;
+    public static function getProxiedObject () {
+        return self::$proxiedObject ? self::$proxiedObject :
+               self::$proxiedObject = static::createProxiedObject();
     }
+
+    protected static function createProxiedObject () {
+        throw new \RuntimeException(__METHOD__.' must be overridden');
+    }
+
 }

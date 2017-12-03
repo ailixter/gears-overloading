@@ -6,16 +6,14 @@
 
 namespace Ailixter\Gears\Example;
 
+use Ailixter\Gears\Overloading\AbstractGlobalizer;
+
 /**
- * TestGlobalizer - .
- *
  * @author AII (Alexey Ilyin)
  */
-class TestGlobalizer extends \Ailixter\Gears\Overloading\AbstractGlobalizer
+class TestGlobalizer extends AbstractGlobalizer
 {
-    public static function getProxiedObject () {
-        return self::$proxiedObject ? 
-            self::$proxiedObject :
-            self::$proxiedObject = new \TestClass;
+    public static function createProxiedObject () {
+        return new \TestClass;
     }
 }

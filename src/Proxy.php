@@ -7,7 +7,7 @@
 namespace Ailixter\Gears\Overloading;
 
 /**
- * Proxy - trait to proxy, adapt and decorate.
+ * Trait to proxy, adapt and decorate.
  *
  * @author AII (Alexey Ilyin)
  */

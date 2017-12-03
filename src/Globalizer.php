@@ -7,8 +7,6 @@
 namespace Ailixter\Gears\Overloading;
 
 /**
- * Globalizer - .
- *
  * @author AII (Alexey Ilyin)
  */
 trait Globalizer
