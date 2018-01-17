@@ -3,7 +3,7 @@
 /*
  * (C) {YEAR}, AII (Alexey Ilyin).
  */
-namespace Ailixter\Gears\Overloading;
+namespace Ailixter\Gears;
 /**
  * @author AII (Alexey Ilyin)
  */

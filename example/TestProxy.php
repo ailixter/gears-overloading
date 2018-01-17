@@ -5,7 +5,7 @@
  */
 namespace Ailixter\Gears\Example;
 
-use Ailixter\Gears\Overloading\AbstractProxy;
+use Ailixter\Gears\AbstractProxy;
 
 /**
  * @author AII (Alexey Ilyin)

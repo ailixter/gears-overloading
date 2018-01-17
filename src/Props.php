@@ -4,7 +4,7 @@
  * (C) 2017, AII (Alexey Ilyin).
  */
 
-namespace Ailixter\Gears\Overloading;
+namespace Ailixter\Gears;
 
 trait Props
 {

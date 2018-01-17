@@ -5,7 +5,7 @@
  */
 namespace Ailixter\Gears\Example;
 
-use Ailixter\Gears\Overloading\Props;
+use Ailixter\Gears\Props;
 
 /**
  * @author AII (Alexey Ilyin)

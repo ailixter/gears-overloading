@@ -1,12 +1,12 @@
 <?php
 
 /*
- * (C) {YEAR}, AII (Alexey Ilyin).
+ * (C) 2017, AII (Alexey Ilyin).
  */
 
 namespace Ailixter\Gears\Example;
 
-use Ailixter\Gears\Overloading\AbstractGlobalizer;
+use Ailixter\Gears\AbstractGlobalizer;
 
 /**
  * @author AII (Alexey Ilyin)

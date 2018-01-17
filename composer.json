@@ -9,7 +9,7 @@
     ],
     "autoload": {
         "psr-4": {
-            "Ailixter\\Gears\\Overloading\\": "src/",
+            "Ailixter\\Gears\\": "src/",
             "Ailixter\\Gears\\Example\\":     "example/"
         }
     },
