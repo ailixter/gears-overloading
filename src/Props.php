@@ -42,17 +42,20 @@ trait Props
     }
 
     final public function __isset ($prop) {
-        return $this->{$prop} !== $this->nullValue;
+        return method_exists($this, $method = "isset$prop") ?
+            (bool)$this->$method() : $this->{$prop} !== $this->nullValue;
     }
 
     final public function __unset ($prop) {
-        $this->{$prop} = $this->nullValue;
+        method_exists($this, $method = "unset$prop") ?
+            $this->$method() : $this->{$prop} = $this->nullValue;
     }
 
     /**
      * Default null/unexisting property value.
      * Override it to provide custom dynamic property handling.
      * @return mixed
+     * @deprecated
      */
     protected function getNullValue () {
         return null;

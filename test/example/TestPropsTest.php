@@ -29,14 +29,12 @@ class TestPropsTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @ covers Ailixter\Gears\Example\TestProps::__get
      */
     public function test__get () {
         self::assertEquals('my public', $this->object->myPub);
     }
 
     /**
-     * @ covers Ailixter\Gears\Example\TestProps::propertyGet
      * @expectedException \RuntimeException
      */
     public function test__get_private () {
@@ -44,7 +42,6 @@ class TestPropsTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @ covers Ailixter\Gears\Example\TestProps::propertyGet
      * @expectedException \RuntimeException
      */
     public function test__get_unknown () {
@@ -52,7 +49,6 @@ class TestPropsTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers Ailixter\Gears\Example\TestProps::__set
      */
     public function test__set () {
         $this->object->myPub = 123;
@@ -60,7 +56,6 @@ class TestPropsTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @ covers Ailixter\Gears\Example\TestProps::propertyGet
      * @expectedException \RuntimeException
      */
     public function test__set_private () {
@@ -68,7 +63,6 @@ class TestPropsTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @ covers Ailixter\Gears\Example\TestProps::propertyGet
      * @expectedException \RuntimeException
      */
     public function test__set_unknown () {
@@ -77,15 +71,15 @@ class TestPropsTest extends \PHPUnit_Framework_TestCase
 
     /**
      */
-    public function test__isset () {
+    public function test__isset_pub () {
         self::assertTrue(isset($this->object->myPub));
     }
 
     /**
      * @expectedException \RuntimeException
-     * SIC! unset removes the defined property
+     * SIC! unset removes accessible property
      */
-    public function test__unset () {
+    public function test__unset_pub () {
         unset($this->object->myPub);
         self::assertFalse(isset($this->object->myPub));
     }
