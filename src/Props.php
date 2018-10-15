@@ -55,7 +55,6 @@ trait Props
      * Default null/unexisting property value.
      * Override it to provide custom dynamic property handling.
      * @return mixed
-     * @deprecated
      */
     protected function getNullValue () {
         return null;
