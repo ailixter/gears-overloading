@@ -6,6 +6,8 @@
 
 namespace Ailixter\Gears;
 
+use Ailixter\Gears\Exceptions\MethodException;
+
 /**
  * @author AII (Alexey Ilyin)
  */
@@ -13,9 +15,7 @@ trait Globalizer
 {
     public static function __callStatic ($name, $arguments) {
         if (!is_callable([static::getProxiedObject(), $name])) {
-            throw new \RuntimeException('method '
-                .get_class(static::getProxiedObject())
-                ."::$name does not exist or inaccessible");
+            throw MethodException::forCall(static::getProxiedObject(), $name);
         }
         return call_user_func_array([static::getProxiedObject(), $name], $arguments);
     }

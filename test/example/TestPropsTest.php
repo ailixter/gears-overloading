@@ -35,14 +35,14 @@ class TestPropsTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @expectedException \RuntimeException
+     * @expectedException \Ailixter\Gears\Exceptions\PropertyException
      */
     public function test__get_private () {
         return($this->object->myPri);
     }
 
     /**
-     * @expectedException \RuntimeException
+     * @expectedException \Ailixter\Gears\Exceptions\PropertyException
      */
     public function test__get_unknown () {
         return($this->object->unknown);
@@ -56,17 +56,23 @@ class TestPropsTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @expectedException \RuntimeException
+     * @expectedException \Ailixter\Gears\Exceptions\PropertyException
      */
     public function test__set_private () {
         $this->object->myPri = 123;
     }
 
     /**
-     * @expectedException \RuntimeException
+     * @expectedException \Ailixter\Gears\Exceptions\PropertyException
      */
     public function test__set_unknown () {
         $this->object->unknown = 123;
+    }
+
+    /**
+     */
+    public function test__isset_unknown () {
+        self::assertFalse(isset($this->object->unknown));
     }
 
     /**
@@ -76,7 +82,7 @@ class TestPropsTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @expectedException \RuntimeException
+     * @expectedException \Ailixter\Gears\Exceptions\PropertyException
      * SIC! unset removes accessible property
      */
     public function test__unset_pub () {

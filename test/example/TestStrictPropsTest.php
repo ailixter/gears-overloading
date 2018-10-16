@@ -48,7 +48,7 @@ class TestStrictPropsTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @expectedException \RuntimeException
+     * @expectedException \Ailixter\Gears\Exceptions\PropertyException
      */
     public function test__getNotDefined () {
         return $this->object->notdefined;
@@ -67,7 +67,7 @@ class TestStrictPropsTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @expectedException \RuntimeException
+     * @expectedException \Ailixter\Gears\Exceptions\PropertyException
      */
     public function test__setNotDefined () {
         return $this->object->notdefined = true;
@@ -88,7 +88,7 @@ class TestStrictPropsTest extends \PHPUnit_Framework_TestCase
         $expected = $this->object->expectedVars();
         $key = 'calcPro';
         unset($this->object->$key);
-        $this->assert(isset($this->object->$key));
+        $this->assertFalse(isset($this->object->$key));
         $this->assertEmpty($this->object->$key);
         $this->assertInternalType($expected[$key][0], $this->object->propertyGetValue($key));
     }

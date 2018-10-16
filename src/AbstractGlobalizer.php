@@ -20,6 +20,11 @@ abstract class AbstractGlobalizer
                self::$proxiedObject = static::createProxiedObject();
     }
 
+    /**
+     *
+     * @throws \RuntimeException
+     * @todo make abstract for PHP7
+     */
     protected static function createProxiedObject () {
         throw new \RuntimeException(__METHOD__.' must be overridden');
     }

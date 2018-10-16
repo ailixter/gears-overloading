@@ -6,6 +6,9 @@
 
 namespace Ailixter\Gears;
 
+use Ailixter\Gears\Exceptions\MethodException;
+use RuntimeException;
+
 /**
  * Trait to proxy, adapt and decorate.
  *
@@ -17,9 +20,7 @@ trait Proxy
 
     final public function __call ($name, $arguments) {
         if (!is_callable([$this->proxiedObject, $name])) {
-            throw new \RuntimeException('method '
-                .get_class($this->proxiedObject)
-                ."::$name does not exist or inaccessible");
+            throw MethodException::forCall($this->proxiedObject, $name);
         }
         return call_user_func_array([$this->proxiedObject, $name], $arguments);
     }
@@ -27,10 +28,10 @@ trait Proxy
     /**
      * Override it if there is no proxiedObject property in hosting class
      * and the proxied object is determined dynamically.
-     * @throws \RuntimeException
+     * @throws RuntimeException
      */
     protected function getProxiedObject () {
-        throw new \RuntimeException('proxied object in '
+        throw new RuntimeException('proxied object in '
             .get_class($this).' is not specified');
     }
 
@@ -40,5 +41,10 @@ trait Proxy
 
     final protected function propertySet ($name, $value) {
         $this->proxiedObject->{$name} = $value;
+    }
+
+    protected function existingProperty ($prop) {
+        return property_exists($this->proxiedObject, $prop) ?
+            $this->proxiedObject->{$prop} : $this->nullValue;
     }
 }

@@ -6,6 +6,8 @@
 
 namespace Ailixter\Gears;
 
+use Ailixter\Gears\Exceptions\PropertyException;
+
 /**
  * @author AII (Alexey Ilyin)
  */
@@ -15,16 +17,14 @@ trait StrictProps
     
     protected function propertyGet ($prop) {
         if (!\property_exists($this, $prop)) {
-            throw new \RuntimeException(\get_class($this)
-                ." has no property '$prop' to read from");
+            throw PropertyException::forGet($this, $prop);
         }
         return $this->{$prop};
     }
 
     protected function propertySet ($prop, $value) {
         if (!\property_exists($this, $prop)) {
-            throw new \RuntimeException(\get_class($this)
-                ." has no property '$prop' to write ".gettype($value)." into");
+            throw PropertyException::forSet($this, $prop, $value);
         }
         $this->{$prop} = $value;
         return $this;

@@ -6,27 +6,53 @@
 
 namespace Ailixter\Gears;
 
+use Ailixter\Gears\Exceptions\PropertyException;
+
 trait Props
 {
     final public function __get ($prop) {
-        return method_exists($this, $method = "get$prop") ?
-            $this->$method() : $this->propertyGet($prop);
+        $method = $this->existingMethod('get', $prop);
+        return $method ? $this->$method() : $this->propertyGet($prop);
     }
 
     final public function __set ($prop, $value) {
-        method_exists($this, $method = "set$prop") ?
-            $this->$method($value) : $this->propertySet($prop, $value);
+        $method = $this->existingMethod('set', $prop);
+        $method ? $this->$method($value) : $this->propertySet($prop, $value);
+    }
+
+    final public function __isset ($prop) {
+        if (($method = $this->existingMethod('isset', $prop))) {
+            return (bool)$this->$method();
+        }
+        if (($method = $this->existingMethod('get', $prop))) {
+            return $this->$method() !== $this->nullValue;
+        }
+        return $this->propertyIsSet($prop);
+    }
+
+    final public function __unset ($prop) {
+        $method = $this->existingMethod('unset', $prop);
+        $method ? $this->$method() : $this->{$prop} = $this->nullValue;
+    }
+
+    protected function existingMethod ($prefix, $prop) {
+        $method = "$prefix$prop";
+        return method_exists($this, $method) ? $method : false;
+    }
+
+    protected function existingProperty ($prop) {
+        return property_exists($this, $prop) ?
+            $this->{$prop} : $this->nullValue;
     }
 
     /**
      * Default property handler.
      * Override it to provide custom dynamic props.
      * @param scalar $prop
-     * @throws \RuntimeException
+     * @throws PropertyException
      */
     protected function propertyGet ($prop) {
-        throw new \RuntimeException(get_class($this)
-            ." has no property '$prop' to read from");
+        throw PropertyException::forGet($this, $prop);
     }
 
     /**
@@ -34,23 +60,16 @@ trait Props
      * Override it to provide custom dynamic props.
      * @param scalar $prop
      * @param mixed  $value
-     * @throws \RuntimeException
+     * @throws PropertyException
      */
     protected function propertySet ($prop, $value) {
-        throw new \RuntimeException(get_class($this)
-            ." has no property '$prop' to write ".gettype($value). " into");
+        throw PropertyException::forSet($this, $prop, $value);
     }
 
-    final public function __isset ($prop) {
-        return method_exists($this, $method = "isset$prop") ?
-            (bool)$this->$method() : $this->{$prop} !== $this->nullValue;
+    protected function propertyIsSet ($prop) {
+        return $this->existingProperty($prop) !== $this->nullValue;
     }
-
-    final public function __unset ($prop) {
-        method_exists($this, $method = "unset$prop") ?
-            $this->$method() : $this->{$prop} = $this->nullValue;
-    }
-
+    
     /**
      * Default null/unexisting property value.
      * Override it to provide custom dynamic property handling.
@@ -59,5 +78,4 @@ trait Props
     protected function getNullValue () {
         return null;
     }
-
 }

@@ -1,6 +1,6 @@
 {
     "name": "ailixter/gears-overloading",
-    "description": "Description of project Gears.Overloading.",
+    "description": "The project, which Gears Overloading.",
     "authors": [
         {
             "name": "ailixter",
@@ -10,7 +10,7 @@
     "autoload": {
         "psr-4": {
             "Ailixter\\Gears\\": "src/",
-            "Ailixter\\Gears\\Example\\":     "example/"
+            "Ailixter\\Gears\\Example\\": "example/"
         }
     },
 

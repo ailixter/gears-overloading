@@ -32,14 +32,13 @@ class TestGlobalizerTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @expectedException \RuntimeException
+     * @expectedException Ailixter\Gears\Exceptions\MethodException
      */
     public function testProtectedFn () {
         TestGlobalizer::protectedFn();
     }
 
     /**
-     * @ covers Ailixter\Gears\Example\TestGlobalizer::getProxiedObject
      */
     public function testGetProxiedObject () {
         self::assertInstanceOf('\\TestClass', TestGlobalizer::getProxiedObject());
