@@ -34,7 +34,7 @@ class TestStrictPropsTest extends \PHPUnit_Framework_TestCase
     public function testKeys () {
         $pkeys = $this->object->propertyKeys();
         foreach (array_keys($this->object->expectedVars()) as $key) {
-            $this->assertContains($key, $pkeys);
+            self::assertContains($key, $pkeys);
         }
     }
 
@@ -43,7 +43,7 @@ class TestStrictPropsTest extends \PHPUnit_Framework_TestCase
     public function test__get () {
         foreach ($this->object->expectedVars() as $key => $typval) {
             list(,$value) = $typval;
-            $this->assertEquals($value, $this->object->$key);
+            self::assertEquals($value, $this->object->$key);
         }
     }
 
@@ -61,8 +61,8 @@ class TestStrictPropsTest extends \PHPUnit_Framework_TestCase
             list($type, $value) = $typval;
             $value .= '*';
             $this->object->$key = $value;
-            $this->assertEquals($value, $this->object->$key);
-            $this->assertInternalType($type, $this->object->propertyGetValue($key));
+            self::assertEquals($value, $this->object->$key);
+            self::assertInternalType($type, $this->object->propertyGetValue($key));
         }
     }
 
@@ -77,8 +77,8 @@ class TestStrictPropsTest extends \PHPUnit_Framework_TestCase
      */
     public function test__isset () {
         foreach (array_keys($this->object->expectedVars()) as $key) {
-            $this->assertTrue(isset($this->object->$key));
-            $this->assertNotEmpty($this->object->$key);
+            self::assertTrue(isset($this->object->$key));
+            self::assertNotEmpty($this->object->$key);
         }
     }
 
@@ -88,9 +88,9 @@ class TestStrictPropsTest extends \PHPUnit_Framework_TestCase
         $expected = $this->object->expectedVars();
         $key = 'calcPro';
         unset($this->object->$key);
-        $this->assertFalse(isset($this->object->$key));
-        $this->assertEmpty($this->object->$key);
-        $this->assertInternalType($expected[$key][0], $this->object->propertyGetValue($key));
+        self::assertFalse(isset($this->object->$key));
+        self::assertEmpty($this->object->$key);
+        self::assertInternalType($expected[$key][0], $this->object->propertyGetValue($key));
     }
 
 }

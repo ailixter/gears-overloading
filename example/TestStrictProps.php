@@ -40,6 +40,7 @@ class TestStrictProps
     }
     protected function setCalcPri ($str) {
          $this->calcPri = explode(',', $str);
+         return $this;
     }
 
     protected function getCalcPro () {
@@ -47,6 +48,7 @@ class TestStrictProps
     }
     protected function setCalcPro ($str) {
         $this->calcPro = explode(',', $str);
+        return $this;
     }
     protected function issetCalcPro () {
         return count($this->calcPro);
