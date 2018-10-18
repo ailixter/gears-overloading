@@ -11,7 +11,10 @@ namespace Ailixter\Gears\Exceptions;
  */
 class ExceptionBase extends \RuntimeException
 {
-    protected static function getClass ($object) {
+
+    protected static function getClass($object)
+    {
         return is_object($object) ? get_class($object) : $object;
     }
+
 }

@@ -7,6 +7,7 @@ namespace Ailixter\Gears\Example;
  */
 class TestAutoGetSetStrictPropsTest extends \PHPUnit_Framework_TestCase
 {
+
     /**
      * @var TestAutoGetSetStrictProps
      */
@@ -16,7 +17,8 @@ class TestAutoGetSetStrictPropsTest extends \PHPUnit_Framework_TestCase
      * Sets up the fixture, for example, opens a network connection.
      * This method is called before a test is executed.
      */
-    protected function setUp () {
+    protected function setUp()
+    {
         $this->object = new TestAutoGetSetStrictProps;
     }
 
@@ -24,25 +26,32 @@ class TestAutoGetSetStrictPropsTest extends \PHPUnit_Framework_TestCase
      * Tears down the fixture, for example, closes a network connection.
      * This method is called after a test is executed.
      */
-    protected function tearDown () {
+    protected function tearDown()
+    {
         
     }
 
     /**
      */
-    public function testGetMyPri () {
+    public function testGetMyPri()
+    {
         self::assertEquals('*x', $this->object->setMyPri('x')->getMyPri());
     }
 
-    public function keysProvider () {
-        return array_map(function ($key) { return [$key]; },
-            TestAutoGetSetStrictProps::propertyKeys());
+    public function keysProvider()
+    {
+        return array_map(function ($key) {
+            return [$key];
+        }, TestAutoGetSetStrictProps::propertyKeys());
     }
+
     /**
      * @dataProvider keysProvider
      */
-    public function testAll ($key) {
-        $this->object->{'set'.ucfirst($key)}('*'.$key);
-        self::assertEquals($this->object->$key, $this->object->{'get'.ucfirst($key)}());
+    public function testAll($key)
+    {
+        $this->object->{'set' . ucfirst($key)}('*' . $key);
+        self::assertEquals($this->object->$key, $this->object->{'get' . ucfirst($key)}());
     }
+
 }

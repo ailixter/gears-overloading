@@ -7,6 +7,7 @@ namespace Ailixter\Gears\Example;
  */
 class TestAutoGetSetPropsTest extends \PHPUnit_Framework_TestCase
 {
+
     /**
      * @var TestAutoGetSetProps
      */
@@ -16,7 +17,8 @@ class TestAutoGetSetPropsTest extends \PHPUnit_Framework_TestCase
      * Sets up the fixture, for example, opens a network connection.
      * This method is called before a test is executed.
      */
-    protected function setUp () {
+    protected function setUp()
+    {
         $this->object = new TestAutoGetSetProps;
     }
 
@@ -24,20 +26,25 @@ class TestAutoGetSetPropsTest extends \PHPUnit_Framework_TestCase
      * Tears down the fixture, for example, closes a network connection.
      * This method is called after a test is executed.
      */
-    protected function tearDown () {
+    protected function tearDown()
+    {
 
     }
 
     /**
      */
-    public function testSet () {
+    public function testSet()
+    {
         self::assertInstanceOf(get_class($this->object), $this->object->setX('x'));
         return $this->object;
     }
+
     /**
      * @depends testSet
      */
-    public function testGet (TestAutoGetSetProps $test) {
+    public function testGet(TestAutoGetSetProps $test)
+    {
         self::assertEquals('x', $test->getX());
     }
+
 }

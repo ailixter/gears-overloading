@@ -7,6 +7,7 @@ namespace Ailixter\Gears\Example;
  */
 class TestStrictPropsTest extends \PHPUnit_Framework_TestCase
 {
+
     /**
      * @var TestStrictProps
      * 
@@ -17,7 +18,8 @@ class TestStrictPropsTest extends \PHPUnit_Framework_TestCase
      * Sets up the fixture, for example, opens a network connection.
      * This method is called before a test is executed.
      */
-    protected function setUp () {
+    protected function setUp()
+    {
         $this->object = new TestStrictProps;
     }
 
@@ -25,13 +27,15 @@ class TestStrictPropsTest extends \PHPUnit_Framework_TestCase
      * Tears down the fixture, for example, closes a network connection.
      * This method is called after a test is executed.
      */
-    protected function tearDown () {
+    protected function tearDown()
+    {
 
     }
 
     /**
      */
-    public function testKeys () {
+    public function testKeys()
+    {
         $pkeys = $this->object->propertyKeys();
         foreach (array_keys($this->object->expectedVars()) as $key) {
             self::assertContains($key, $pkeys);
@@ -40,9 +44,10 @@ class TestStrictPropsTest extends \PHPUnit_Framework_TestCase
 
     /**
      */
-    public function test__get () {
+    public function test__get()
+    {
         foreach ($this->object->expectedVars() as $key => $typval) {
-            list(,$value) = $typval;
+            list(, $value) = $typval;
             self::assertEquals($value, $this->object->$key);
         }
     }
@@ -50,13 +55,15 @@ class TestStrictPropsTest extends \PHPUnit_Framework_TestCase
     /**
      * @expectedException \Ailixter\Gears\Exceptions\PropertyException
      */
-    public function test__getNotDefined () {
+    public function test__getNotDefined()
+    {
         return $this->object->notdefined;
     }
 
     /**
      */
-    public function test__set () {
+    public function test__set()
+    {
         foreach ($this->object->expectedVars() as $key => $typval) {
             list($type, $value) = $typval;
             $value .= '*';
@@ -69,13 +76,15 @@ class TestStrictPropsTest extends \PHPUnit_Framework_TestCase
     /**
      * @expectedException \Ailixter\Gears\Exceptions\PropertyException
      */
-    public function test__setNotDefined () {
+    public function test__setNotDefined()
+    {
         return $this->object->notdefined = true;
     }
 
     /**
      */
-    public function test__isset () {
+    public function test__isset()
+    {
         foreach (array_keys($this->object->expectedVars()) as $key) {
             self::assertTrue(isset($this->object->$key));
             self::assertNotEmpty($this->object->$key);
@@ -84,7 +93,8 @@ class TestStrictPropsTest extends \PHPUnit_Framework_TestCase
 
     /**
      */
-    public function test__unset () {
+    public function test__unset()
+    {
         $expected = $this->object->expectedVars();
         $key = 'calcPro';
         unset($this->object->$key);

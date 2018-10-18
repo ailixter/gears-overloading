@@ -11,13 +11,15 @@ namespace Ailixter\Gears;
  */
 abstract class AbstractGlobalizer
 {
+
     use Globalizer;
 
     private static $proxiedObject;
 
-    public static function getProxiedObject () {
+    public static function getProxiedObject()
+    {
         return self::$proxiedObject ? self::$proxiedObject :
-               self::$proxiedObject = static::createProxiedObject();
+            self::$proxiedObject = static::createProxiedObject();
     }
 
     /**
@@ -25,8 +27,9 @@ abstract class AbstractGlobalizer
      * @throws \RuntimeException
      * @todo make abstract for PHP7
      */
-    protected static function createProxiedObject () {
-        throw new \RuntimeException(__METHOD__.' must be overridden');
+    protected static function createProxiedObject()
+    {
+        throw new \RuntimeException(__METHOD__ . ' must be overridden');
     }
 
 }

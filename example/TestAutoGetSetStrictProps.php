@@ -13,9 +13,12 @@ use Ailixter\Gears\AutoGetSetProps;
  */
 class TestAutoGetSetStrictProps extends TestStrictProps
 {
+
     use AutoGetSetProps;
 
-    public function getMyPri () {
+    public function getMyPri()
+    {
         return '*' . $this->existingProperty('myPri');
     }
+
 }

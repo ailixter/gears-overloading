@@ -3,6 +3,7 @@
 /*
  * (C) {YEAR}, AII (Alexey Ilyin).
  */
+
 namespace Ailixter\Gears\Example;
 
 use Ailixter\Gears\AbstractProxy;
@@ -12,14 +13,19 @@ use Ailixter\Gears\AbstractProxy;
  */
 class TestProxy extends AbstractProxy
 {
-    private     $myPri = 'my private';
-    protected   $myPro = 'my protected';
-    public      $myPub = 'my public';
 
-    protected function protectedMy () {
+    private $myPri = 'my private';
+    protected $myPro = 'my protected';
+    public $myPub = 'my public';
+
+    protected function protectedMy()
+    {
         return $this->myPro;
     }
-    public function publicMy () {
+
+    public function publicMy()
+    {
         return $this->myPub;
     }
+
 }

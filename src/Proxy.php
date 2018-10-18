@@ -16,9 +16,11 @@ use RuntimeException;
  */
 trait Proxy
 {
+
     use Props;
 
-    final public function __call ($name, $arguments) {
+    final public function __call($name, $arguments)
+    {
         if (!is_callable([$this->proxiedObject, $name])) {
             throw MethodException::forCall($this->proxiedObject, $name);
         }
@@ -30,21 +32,26 @@ trait Proxy
      * and the proxied object is determined dynamically.
      * @throws RuntimeException
      */
-    protected function getProxiedObject () {
+    protected function getProxiedObject()
+    {
         throw new RuntimeException('proxied object in '
-            .get_class($this).' is not specified');
+        . get_class($this) . ' is not specified');
     }
 
-    final protected function propertyGet ($name) {
+    final protected function propertyGet($name)
+    {
         return $this->proxiedObject->{$name};
     }
 
-    final protected function propertySet ($name, $value) {
+    final protected function propertySet($name, $value)
+    {
         $this->proxiedObject->{$name} = $value;
     }
 
-    protected function existingProperty ($prop) {
+    protected function existingProperty($prop)
+    {
         return property_exists($this->proxiedObject, $prop) ?
             $this->proxiedObject->{$prop} : $this->nullValue;
     }
+
 }

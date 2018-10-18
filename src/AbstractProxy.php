@@ -3,21 +3,27 @@
 /*
  * (C) {YEAR}, AII (Alexey Ilyin).
  */
+
 namespace Ailixter\Gears;
+
 /**
  * @author AII (Alexey Ilyin)
  */
 abstract class AbstractProxy
 {
+
     use Proxy;
 
     private $proxiedObject;
 
-    public function __construct ($proxiedObject) {
+    public function __construct($proxiedObject)
+    {
         $this->proxiedObject = $proxiedObject;
     }
 
-    protected function getProxiedObject () {
+    protected function getProxiedObject()
+    {
         return $this->proxiedObject;
     }
+
 }

@@ -13,16 +13,19 @@ use Ailixter\Gears\Exceptions\PropertyException;
  */
 trait StrictProps
 {
+
     use Props;
-    
-    protected function propertyGet ($prop) {
+
+    protected function propertyGet($prop)
+    {
         if (!\property_exists($this, $prop)) {
             throw PropertyException::forGet($this, $prop);
         }
         return $this->{$prop};
     }
 
-    protected function propertySet ($prop, $value) {
+    protected function propertySet($prop, $value)
+    {
         if (!\property_exists($this, $prop)) {
             throw PropertyException::forSet($this, $prop, $value);
         }
@@ -34,8 +37,10 @@ trait StrictProps
      * @staticvar type $keys
      * @return array
      */
-    final public static function propertyKeys () {
+    final public static function propertyKeys()
+    {
         static $keys;
         return $keys ? $keys : $keys = \array_keys(\get_class_vars(\get_class()));
     }
+
 }

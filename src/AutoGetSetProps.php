@@ -11,7 +11,9 @@ namespace Ailixter\Gears;
  */
 trait AutoGetSetProps
 {
-    public function __call ($name, $arguments) {
+
+    public function __call($name, $arguments)
+    {
         if (!preg_match('/^(get|set)(\w+)$/', $name, $m)) {
             return;
         }
@@ -21,8 +23,9 @@ trait AutoGetSetProps
                     $this->$name() : $this->{lcfirst($m[2])};
             case 'set':
                 method_exists($this, $name) ?
-                    $this->$name($arguments[0]) : $this->{lcfirst($m[2])} = $arguments[0];
+                        $this->$name($arguments[0]) : $this->{lcfirst($m[2])} = $arguments[0];
                 return $this;
         }
     }
+
 }

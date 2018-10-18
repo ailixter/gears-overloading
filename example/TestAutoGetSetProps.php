@@ -13,7 +13,9 @@ use Ailixter\Gears\AutoGetSetProps;
  */
 class TestAutoGetSetProps
 {
+
     use AutoGetSetProps;
-    
+
     private $x;
+
 }

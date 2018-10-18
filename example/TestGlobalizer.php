@@ -13,7 +13,10 @@ use Ailixter\Gears\AbstractGlobalizer;
  */
 class TestGlobalizer extends AbstractGlobalizer
 {
-    public static function createProxiedObject () {
+
+    public static function createProxiedObject()
+    {
         return new \TestClass;
     }
+
 }

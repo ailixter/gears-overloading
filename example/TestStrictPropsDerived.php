@@ -11,5 +11,7 @@ namespace Ailixter\Gears\Example;
  */
 class TestStrictPropsDerived extends TestStrictProps
 {
+
     private $notdata = 'not data';
+
 }
