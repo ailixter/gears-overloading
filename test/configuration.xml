@@ -6,6 +6,7 @@
     <filter>
         <whitelist processUncoveredFilesFromWhitelist="true">
             <directory suffix=".php">../src</directory>
+            <directory suffix=".php">../example</directory>
             <!-- file>/path/to/file</file>
             <exclude>
               <directory suffix=".php">/path/to/files</directory>
