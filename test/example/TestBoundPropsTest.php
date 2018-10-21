@@ -87,8 +87,24 @@ class TestBoundPropsTest extends \PHPUnit_Framework_TestCase
         self::assertNotSame([], $history);
     }
 
+    public function testDynamic()
+    {
+        $history = [];
+        $binding = new TestPropsBinding('dynamic', function ($param) use (&$history) {
+            $history[] = $param;
+        });
+        $this->object->dynamic = $binding;
+        self::assertSame($binding->formatValue($this->object, 'dynamic'), $this->object->dynamic);
+        $this->object->dynamic = 456;
+        self::assertSame($binding->formatValue($this->object, 'dynamic'), $this->object->dynamic);
+        self::assertNotSame([], $history);
+    }
+
+    /**
+     * @expectedException PHPUnit_Framework_Error_Notice
+     */
     public function testUndefined()
     {
-        $x = $this->object->x;
+        self::assertEmpty($this->object->x);
     }
 }

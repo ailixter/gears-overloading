@@ -20,4 +20,16 @@ class TestBoundProps
     protected $myBoundPro;
     protected $myPro;
 
+    private   $params = [];
+    
+    public function getDynamic()
+    {
+        return isset($this->params['dyn']) ? $this->params['dyn'] : null;
+    }
+
+    public function setDynamic($value)
+    {
+        $this->params['dyn'] = $value;
+        return $this;
+    }
 }

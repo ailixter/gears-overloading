@@ -6,10 +6,12 @@
 
 namespace Ailixter\Gears;
 
+use Ailixter\Gears\Helpers\PropsHelpers;
 use Ailixter\Gears\Exceptions\PropertyException;
 
 trait Props
 {
+    use PropsHelpers;
 
     final public function __get($prop)
     {
@@ -40,18 +42,6 @@ trait Props
         $method ? $this->$method() : $this->{$prop} = $this->nullValue;
     }
 
-    protected function existingMethod($prefix, $prop)
-    {
-        $method = "$prefix$prop";
-        return method_exists($this, $method) ? $method : false;
-    }
-
-    protected function existingProperty($prop)
-    {
-        return property_exists($this, $prop) ?
-            $this->{$prop} : $this->nullValue;
-    }
-
     /**
      * Default property handler.
      * Override it to provide custom dynamic props.
@@ -73,21 +63,6 @@ trait Props
     protected function propertySet($prop, $value)
     {
         throw PropertyException::forSet($this, $prop, $value);
-    }
-
-    protected function propertyIsSet($prop)
-    {
-        return $this->existingProperty($prop) !== $this->nullValue;
-    }
-
-    /**
-     * Default null/unexisting property value.
-     * Override it to provide custom dynamic property handling.
-     * @return mixed
-     */
-    protected function getNullValue()
-    {
-        return null;
     }
 
 }
