@@ -24,12 +24,10 @@ trait BoundProps
             $currentValue->getBoundValue($this, $prop) : $currentValue;
     }
 
-//    public function __isset($prop)
-//    {
-//        $currentValue = $this->{$prop};
-//        return $currentValue instanceof Binding ?
-//            $currentValue->getBoundValue($this, $prop) : $currentValue;
-//    }
+    public function __isset($prop)
+    {
+        return $this->__get($prop) !== $this->getNullValue();
+    }
 
     final public function __set($prop, $value)
     {

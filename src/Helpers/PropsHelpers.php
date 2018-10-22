@@ -21,12 +21,12 @@ trait PropsHelpers
     protected function existingProperty($prop)
     {
         return property_exists($this, $prop) ?
-            $this->{$prop} : $this->nullValue;
+            $this->{$prop} : $this->getNullValue();
     }
 
     protected function propertyIsSet($prop)
     {
-        return $this->existingProperty($prop) !== $this->nullValue;
+        return $this->existingProperty($prop) !== $this->getNullValue();
     }
 
     /**

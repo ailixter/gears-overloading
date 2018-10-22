@@ -31,7 +31,7 @@ trait Props
             return (bool)$this->$method();
         }
         if (($method = $this->existingMethod('get', $prop))) {
-            return $this->$method() !== $this->nullValue;
+            return $this->$method() !== $this->getNullValue();
         }
         return $this->propertyIsSet($prop);
     }
@@ -39,7 +39,7 @@ trait Props
     final public function __unset($prop)
     {
         $method = $this->existingMethod('unset', $prop);
-        $method ? $this->$method() : $this->{$prop} = $this->nullValue;
+        $method ? $this->$method() : $this->{$prop} = $this->getNullValue();
     }
 
     /**

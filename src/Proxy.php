@@ -51,7 +51,7 @@ trait Proxy
     protected function existingProperty($prop)
     {
         return property_exists($this->proxiedObject, $prop) ?
-            $this->proxiedObject->{$prop} : $this->nullValue;
+            $this->proxiedObject->{$prop} : $this->getNullValue();
     }
 
 }
