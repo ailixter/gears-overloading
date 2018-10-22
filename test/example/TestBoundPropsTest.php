@@ -100,6 +100,61 @@ class TestBoundPropsTest extends \PHPUnit_Framework_TestCase
         self::assertNotSame([], $history);
     }
 
+    public function testUnbind()
+    {
+        $history = [];
+        $binding = new TestPropsBinding('to unbind', function ($param) use (&$history) {
+            $history[] = $param;
+        });
+        $this->object->myBoundPro = $binding;
+        self::assertSame($binding->formatValue($this->object, 'myBoundPro'), $this->object->myBoundPro);
+        $this->object->unbind('myBoundPro');
+        $this->object->myBoundPro = 456;
+        self::assertSame(456, $this->object->myBoundPro);
+        self::assertSame([], $history);
+    }
+
+    public function testIsSet()
+    {
+        self::assertFalse(isset($this->object->myPro), 'not is set');
+        $this->object->myPro = 123;
+        self::assertTrue(isset($this->object->myPro), 'is set');
+    }
+
+    public function testUnset()
+    {
+        $this->object->myPro = 123;
+        self::assertTrue(isset($this->object->myPro), 'is set');
+        unset($this->object->myPro);
+        self::assertFalse(isset($this->object->myPro), 'not is set');
+    }
+
+    public function testIsSetBound()
+    {
+        $history = [];
+        $binding = new TestPropsBinding($this->object->nullValue, function ($param) use (&$history) {
+            $history[] = $param;
+        }, false);
+        $this->object->myBoundPro = $binding;
+        self::assertFalse(isset($this->object->myBoundPro), 'not is set');
+        $this->object->myBoundPro = 456;
+        self::assertTrue(isset($this->object->myBoundPro), 'is set');
+        self::assertNotSame([], $history);
+    }
+
+    public function testUnsetBound()
+    {
+        $history = [];
+        $binding = new TestPropsBinding('to unset', function ($param) use (&$history) {
+            $history[] = $param;
+        }, false);
+        $this->object->myBoundPro = $binding;
+        self::assertTrue(isset($this->object->myBoundPro), 'is set');
+        unset($this->object->myBoundPro);
+        self::assertFalse(isset($this->object->myBoundPro), 'not is set');
+        self::assertNotSame([], $history);
+    }
+
     /**
      * @expectedException PHPUnit_Framework_Error_Notice
      */

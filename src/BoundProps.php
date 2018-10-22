@@ -29,6 +29,11 @@ trait BoundProps
         return $this->__get($prop) !== $this->getNullValue();
     }
 
+    public function __unset($prop)
+    {
+        return $this->__set($prop, $this->getNullValue());
+    }
+
     final public function __set($prop, $value)
     {
         if ($value instanceof BoundPropsInterface) {
@@ -43,4 +48,12 @@ trait BoundProps
                 $this->{$prop} = $value;
     }
 
+    public function unbind($prop)
+    {
+        $method = $this->existingMethod('get', $prop);
+        $currentValue = $method ? $this->$method() : $this->{$prop};
+        if ($currentValue instanceof BoundPropsInterface) {
+            $this->{$prop} = $currentValue->getBoundValue($this, $prop);
+        }
+    }
 }

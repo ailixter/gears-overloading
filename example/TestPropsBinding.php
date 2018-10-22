@@ -15,16 +15,20 @@ class TestPropsBinding implements BoundPropsInterface
 {
     private $value;
     private $logFn;
+    private $format;
 
-    function __construct($value, callable $logFn = null)
+    function __construct($value, callable $logFn = null, $format = true)
     {
         $this->value = $value;
         $this->logFn = $logFn;
+        $this->format = $format;
     }
 
     public function formatValue($object, $prop)
     {
-        return sprintf('%s::%s: %s', get_class($object), $prop, $this->value);
+        return $this->format ?
+            sprintf('%s::%s: %s', get_class($object), $prop, $this->value) :
+            $this->value;
     }
 
     public function getBoundValue($object, $prop)
