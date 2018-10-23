@@ -15,13 +15,17 @@ class TestProps
     use Props;
     
     private $myPri = 'my private';
+    
+    public function getMyPri() {
+        return '*' . $this->myPri;
+    }
 }
 
 $test = new TestProps;
-echo $test->getMyPri();
-$test->setMyPri('new');
+echo $test->myPri;
+$test->myPri = 'new';
 ```
-or, for real (defined) prps:
+or, for real (defined) props:
 
 ```php
 class TestRealProps
@@ -61,11 +65,27 @@ class TestStrictProps
 }
 
 $test = new TestStrictProps;
-echo $test->getMyPri();
-$test->myPri = 'new';
 echo $test->myPri;
+$test->myPri = 'new';
 echo $test->undefined;     // PropertyException
 $test->undefined = 'some'; // PropertyException
+```
+
+### Ailixter\Gears\AutoGetSetProps;
+
+How to create getters and fluent setters for all defined props.
+
+```php
+class TestAutoGetSetProps
+{
+    use AutoGetSetProps;
+
+    private $myPri = 'my private';
+}
+
+$test = TestAutoGetSetProps;
+echo $test->getMyPri();
+echo $test->setMyPri('new')->myPri;
 ```
 
 ### Ailixter\Gears\BoundProps
