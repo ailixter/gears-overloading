@@ -9,6 +9,7 @@ namespace Ailixter\Gears;
 use Ailixter\Gears\Exceptions\MethodException;
 
 /**
+ * Provides access to proxied object methods/properties globally (a facade).
  * @author AII (Alexey Ilyin)
  */
 trait Globalizer

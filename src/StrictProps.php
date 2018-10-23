@@ -9,6 +9,7 @@ namespace Ailixter\Gears;
 use Ailixter\Gears\Exceptions\PropertyException;
 
 /**
+ * Narrows {@link Props} access to explicitely defined property set only.
  * @author AII (Alexey Ilyin)
  */
 trait StrictProps

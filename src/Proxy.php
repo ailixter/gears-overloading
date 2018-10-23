@@ -10,8 +10,7 @@ use Ailixter\Gears\Exceptions\MethodException;
 use RuntimeException;
 
 /**
- * Trait to proxy, adapt and decorate.
- *
+ * Trait to proxy, adapt and/or decorate.
  * @author AII (Alexey Ilyin)
  */
 trait Proxy

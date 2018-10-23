@@ -9,6 +9,10 @@ namespace Ailixter\Gears;
 use Ailixter\Gears\Helpers\PropsHelpers;
 use Ailixter\Gears\Exceptions\PropertyException;
 
+/**
+ * Provide getter/setter overriding for properties.
+ * @author AII (Alexey Ilyin)
+ */
 trait Props
 {
     use PropsHelpers;

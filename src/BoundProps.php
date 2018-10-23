@@ -9,6 +9,7 @@ namespace Ailixter\Gears;
 use Ailixter\Gears\Helpers\PropsHelpers;
 
 /**
+ * Binds properties using {@link BoundPropsInterface}.
  * @author AII (Alexey Ilyin)
  */
 trait BoundProps
@@ -24,12 +25,12 @@ trait BoundProps
             $currentValue->getBoundValue($this, $prop) : $currentValue;
     }
 
-    public function __isset($prop)
+    final public function __isset($prop)
     {
         return $this->__get($prop) !== $this->getNullValue();
     }
 
-    public function __unset($prop)
+    final public function __unset($prop)
     {
         return $this->__set($prop, $this->getNullValue());
     }
@@ -48,6 +49,10 @@ trait BoundProps
                 $this->{$prop} = $value;
     }
 
+    /**
+     * @param scalar $prop
+     * @return mixed
+     */
     public function unbind($prop)
     {
         $method = $this->existingMethod('get', $prop);
@@ -55,5 +60,6 @@ trait BoundProps
         if ($currentValue instanceof BoundPropsInterface) {
             $this->{$prop} = $currentValue->getBoundValue($this, $prop);
         }
+        return $currentValue;
     }
 }
