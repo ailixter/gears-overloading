@@ -18,15 +18,15 @@ trait PropsHelpers
         return method_exists($this, $method) ? $method : false;
     }
 
-    protected function existingProperty($prop)
+    protected function existingProperty($prop, $default = null)
     {
-        return property_exists($this, $prop) ?
-            $this->{$prop} : $this->getNullValue();
+        return property_exists($this, $prop) ? $this->{$prop} : $default;
     }
 
     protected function propertyIsSet($prop)
     {
-        return $this->existingProperty($prop) !== $this->getNullValue();
+        $null = $this->getNullValue();
+        return $this->existingProperty($prop, $null) !== $null;
     }
 
     /**

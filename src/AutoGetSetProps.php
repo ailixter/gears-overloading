@@ -15,16 +15,23 @@ trait AutoGetSetProps
 
     public function __call($name, $arguments)
     {
-        if (!preg_match('/^(get|set)(\w+)$/', $name, $m)) {
-            return;
+        if (!preg_match('/^(get|set)(\w+)$/', lcfirst($name), $parts)) {
+            throw Exceptions\MethodException::forCall($this, $name);
         }
-        switch ($m[1]) {
+        switch ($parts[1]) {
             case 'get':
-                return method_exists($this, $name) ?
-                    $this->$name() : $this->{lcfirst($m[2])};
+                if (method_exists($this, $name)) {
+                    $result = call_user_func_array([$this, $name], $arguments);
+                } else {
+                    $result = $this->{lcfirst($parts[2])};
+                }
+                return $result;
             case 'set':
-                method_exists($this, $name) ?
-                        $this->$name($arguments[0]) : $this->{lcfirst($m[2])} = $arguments[0];
+                if (method_exists($this, $name)) {
+                    call_user_func_array([$this, $name], $arguments);
+                } else {
+                    $this->{lcfirst($parts[2])} = $arguments[0];
+                }
                 return $this;
         }
     }

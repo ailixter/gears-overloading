@@ -88,6 +88,27 @@ echo $test->getMyPri();
 echo $test->setMyPri('new')->myPri;
 ```
 
+it's also possible to specify defaults in getters:
+
+```php
+class TestAutoGetPropsWithDefaults
+{
+    use AutoGetSetProps;
+
+    private   $myPri;
+    protected $myPro;
+
+    public function getMyPro($default = 'static default')
+    {
+        return $this->existingProperty('myPro', $default);
+    }
+}
+
+$test = TestAutoGetSetProps;
+echo $test->myPro;                       // static default
+echo $test->getMyPri('dynamic default'); // dynamic default
+```
+
 ### Ailixter\Gears\BoundProps
 
 How to bind properties using BoundPropsInterface.
