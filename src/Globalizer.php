@@ -14,7 +14,7 @@ use Ailixter\Gears\Exceptions\MethodException;
 trait Globalizer
 {
 
-    public static function __callStatic($name, $arguments)
+    final public static function __callStatic($name, $arguments)
     {
         if (!is_callable([static::getProxiedObject(), $name])) {
             throw MethodException::forCall(static::getProxiedObject(), $name);
@@ -22,10 +22,26 @@ trait Globalizer
         return call_user_func_array([static::getProxiedObject(), $name], $arguments);
     }
 
+    /**
+     * @staticvar mixed $object
+     * @return mixed
+     */
     protected static function getProxiedObject()
     {
-        throw new \RuntimeException('proxied object in '
-        . get_class() . ' is not specified');
+        static $object;
+        return $object ? $object : $object = static::createProxiedObject();
     }
 
+    /**
+     * @todo make abstract when in PHP7
+     * @throws \RuntimeException
+     */
+    protected static function createProxiedObject () {
+        throw new \RuntimeException(__METHOD__.' must be overridden');
+    }
+
+    public static function propertyGet($key)
+    {
+        return static::getProxiedObject()->{$key};
+    }
 }

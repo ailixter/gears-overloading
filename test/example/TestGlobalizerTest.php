@@ -37,18 +37,17 @@ class TestGlobalizerTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     */
+    public function testPublicProp()
+    {
+        self::assertEquals('public', TestGlobalizer::propertyGet('pub'));
+    }
+
+    /**
      * @expectedException Ailixter\Gears\Exceptions\MethodException
      */
     public function testProtectedFn()
     {
         TestGlobalizer::protectedFn();
     }
-
-    /**
-     */
-    public function testGetProxiedObject()
-    {
-        self::assertInstanceOf('\\TestClass', TestGlobalizer::getProxiedObject());
-    }
-
 }

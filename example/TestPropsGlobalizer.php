@@ -9,16 +9,18 @@ namespace Ailixter\Gears\Example;
 use Ailixter\Gears\Globalizer;
 
 /**
- * Access proxied object methods globally (provide a facade).
+ * Access proxied object properties globally (provide a facade).
  * @author AII (Alexey Ilyin)
  */
-class TestGlobalizer
+class TestPropsGlobalizer
 {
-    use Globalizer;
+    use Globalizer {
+        getProxiedObject as public;
+    }
 
     public static function createProxiedObject()
     {
-        return new \TestClass;
+        return new TestStrictProps;
     }
 
 }

@@ -9,6 +9,7 @@ namespace Ailixter\Gears\Example;
 use Ailixter\Gears\AbstractProxy;
 
 /**
+ * Proxy your objects (or just use {@link Proxy} - {@see AbstractProxy}).
  * @author AII (Alexey Ilyin)
  */
 class TestProxy extends AbstractProxy
@@ -28,4 +29,8 @@ class TestProxy extends AbstractProxy
         return $this->myPub;
     }
 
+    public function callProtectedMy()
+    {
+        return $this->protectedMy();
+    }
 }

@@ -9,6 +9,10 @@ namespace Ailixter\Gears\Example;
 use Ailixter\Gears\AutoGetSetProps;
 
 /**
+ * Create getters/setters for all inherited strict props.
+ * @method mixed getMyPro()
+ * @method $this setMyPro($value)
+ * ...
  * @author AII (Alexey Ilyin)
  */
 class TestAutoGetSetStrictProps extends TestStrictProps

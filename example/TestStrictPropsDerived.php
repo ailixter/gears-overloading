@@ -7,6 +7,7 @@
 namespace Ailixter\Gears\Example;
 
 /**
+ * Example of using inherited strict property set.
  * @author AII (Alexey Ilyin)
  */
 class TestStrictPropsDerived extends TestStrictProps

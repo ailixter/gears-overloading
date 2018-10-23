@@ -9,6 +9,7 @@ namespace Ailixter\Gears\Example;
 use Ailixter\Gears\BoundPropsInterface;
 
 /**
+ * The binder example for {@link BoundProps}.
  * @author AII (Alexey Ilyin)
  */
 class TestPropsBinding implements BoundPropsInterface

@@ -9,6 +9,7 @@ namespace Ailixter\Gears\Example;
 use Ailixter\Gears\StrictProps;
 
 /**
+ * Allow access to defined properties only.
  * @author AII (Alexey Ilyin)
  */
 class TestStrictProps

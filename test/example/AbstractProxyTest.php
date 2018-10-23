@@ -77,6 +77,14 @@ class AbstractProxyTest extends PHPUnit_Framework_TestCase
     }
 
     /**
+     * @ expectedException \Ailixter\Gears\Exceptions\MethodException
+     */
+    public function test__callProtectedMy()
+    {
+        self::assertNotEmpty($this->object->callProtectedMy());
+    }
+
+    /**
      */
     public function test__get()
     {

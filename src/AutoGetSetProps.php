@@ -7,6 +7,7 @@
 namespace Ailixter\Gears;
 
 /**
+ * Provides getters and fluent setters for properties.
  * @author AII (Alexey Ilyin)
  */
 trait AutoGetSetProps
