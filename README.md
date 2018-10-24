@@ -5,11 +5,11 @@ composer require ailixter/gears-overloading
 
 ## howtos
 
-### Ailixter\Gears\Props
-
-How to provide getter/setter overriding for properties.
+### How to provide getter/setter overriding for properties
 
 ```php
+use Ailixter\Gears\Props;
+
 class TestProps
 {
     use Props;
@@ -23,7 +23,7 @@ class TestProps
 
 $test = new TestProps;
 echo $test->myPri;
-$test->myPri = 'new';
+$test->myPri = 'new'; // PropertyException
 ```
 or, for real (defined) props:
 
@@ -52,11 +52,11 @@ echo $test->undefined;     // Notice
 $test->undefined = 'some'; // perfectly ok
 ```
 
-### Ailixter\Gears\StrictProps
-
-How to support explicitely defined properties only.
+### How to support explicitely defined properties only
 
 ```php
+use Ailixter\Gears\StrictProps;
+
 class TestStrictProps
 {
     use StrictProps;
@@ -71,21 +71,20 @@ echo $test->undefined;     // PropertyException
 $test->undefined = 'some'; // PropertyException
 ```
 
-### Ailixter\Gears\AutoGetSetProps;
-
-How to create getters and fluent setters for all defined props.
+### How to create getters and fluent setters for all defined props
 
 ```php
+use Ailixter\Gears\AutoGetSetProps;
+
 class TestAutoGetSetProps
 {
     use AutoGetSetProps;
 
-    private $myPri = 'my private';
+    private $myPri;
 }
 
 $test = TestAutoGetSetProps;
-echo $test->getMyPri();
-echo $test->setMyPri('new')->myPri;
+echo $test->setMyPri('new')->getMyPri();
 ```
 
 it's also possible to specify defaults in getters:
@@ -93,7 +92,7 @@ it's also possible to specify defaults in getters:
 ```php
 class TestAutoGetPropsWithDefaults
 {
-    use AutoGetSetProps;
+    use Props, AutoGetSetProps;
 
     private   $myPri;
     protected $myPro;
@@ -109,18 +108,18 @@ echo $test->myPro;                       // static default
 echo $test->getMyPri('dynamic default'); // dynamic default
 ```
 
-### Ailixter\Gears\BoundProps
-
-How to bind properties using BoundPropsInterface.
+### How to implement property binding
 
 This enables you to _delegate_ procedural property getting/setting.
 
 ```php
+use Ailixter\Gears\BoundProps;
+
 class TestBoundProps
 {
     use BoundProps;
 
-    /** @var TestPropsBinding */
+    /** @var BoundPropsInterface */
     private $myBoundPri;
 }
 
@@ -130,12 +129,13 @@ $test->myBoundPri = 'new';
 echo $test->myBoundPri;
 ```
 
-### Ailixter\Gears\AbstractProxy
-
-Proxy your objects.
+### How to proxy your objects
 
 ```php
+use Ailixter\Gears\AbstractProxy;
+
 class TestProxy extends AbstractProxy {}
+
 class TestObject {
     public $myPub = 'my public';
     public function myFn () {
@@ -167,19 +167,17 @@ class CustomProxy
 or
 
 ```php
-class CustomProxy2
+class LazyProxy
 {
     use Proxy;
 
     private $obj;
 
-    public function __construct($proxiedObject)
-    {
-        $this->obj = $proxiedObject;
-    }
-
     protected function getProxiedObject()
     {
+        if (!$this->obj instanceof ProxiedObject) {
+            $this->obj = new ProxiedObject;
+        }
         return $this->obj;
     }
 }
