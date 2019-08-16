@@ -40,16 +40,15 @@ class TestStrictPropsDerivedTest extends TestCase
     }
 
     /**
-     * @expectedException PHPUnit_Framework_Error_Notice
+     * @expectedException PHPUnit\Framework\Error\Notice
      */
     public function testPrivateGet()
     {
-        $this->expectException(Notice::class);
         self::assertEmpty($this->object->notdata);
     }
 
     /**
-     * @expectedException PHPUnit_Framework_Error_Notice
+     * @expectedException \PHPUnit\Framework\Error\Notice
      */
     public function testPrivateSet()
     {
